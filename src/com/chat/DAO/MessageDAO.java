@@ -1,32 +1,33 @@
 package com.chat.DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
-import com.chat.model.User;
+import org.bson.Document;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 
 public class MessageDAO {
+	MongoDatabase db = null;
 
-	public void ecrireMessage(long idUser, String message) {
-		Connection connection = null;
-		try {
-			connection = ConnectionManager.getInstance().getConnection();
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("INSERT INTO message VALUES(?,?,?)");
-			preparedStatement.setLong(1, idUser);
-			preparedStatement.setString(2, message);
-			ResultSet result = preparedStatement.executeQuery();
+	public MessageDAO() {
+		MongoClient mongoClient = new MongoClient();
+		db = mongoClient.getDatabase("Chat");
+	}
 
-			if (result != null) {
-				result.first();
-				return new User(result.getInt("id"), result.getString(""));
-			} else
-				return null;
-
-		} catch (Exception e) {
-			return null;
-		}
-
+	public void addMessage(String pseudo, String message) {
+		String format = "dd/MM/yy H:mm:ss"; 
+		java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat( format ); 
+		java.util.Date date = new java.util.Date();
+		
+		db.getCollection("Message")
+		.insertOne(new Document().append("pseudo", pseudo).append("message", message).append("date", date));
+	}
+	
+	public ArrayList<Document> getMessage(){
+		ArrayList<Document> messages = new ArrayList<>();
+		
+		return messages;
 	}
 }

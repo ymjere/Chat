@@ -2,19 +2,38 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>ChatProject</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>/login.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>Test</servlet-name>
-    <servlet-class>com.chat.servlet.test</servlet-class>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>com.chat.servlet.TraiterLoginClientServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Test</servlet-name>
-    <url-pattern>/Test</url-pattern>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>changePseudo</servlet-name>
+    <servlet-class>com.chat.servlet.ChangePseudoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>changePseudo</servlet-name>
+    <url-pattern>/changePseudo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>logOut</servlet-name>
+    <servlet-class>com.chat.servlet.DeconnectionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>logOut</servlet-name>
+    <url-pattern>/deconnect</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>sendMessage</servlet-name>
+    <servlet-class>com.chat.servlet.TraiterLoginClientServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sendMessage</servlet-name>
+    <url-pattern>/sendMessage</url-pattern>
   </servlet-mapping>
 </web-app>
